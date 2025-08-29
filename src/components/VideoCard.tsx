@@ -57,7 +57,7 @@ export function VideoCard({ video, isActive }: VideoCardProps) {
                 <text className='username'>@{video.username}</text>
                 <text className='description'>{video.description}</text>
                 <view className='music-info'>
-                  <text className='music-icon'>♪</text>
+                  <text className='music-icon'>🎵</text>
                   <text className='song'>{video.song}</text>
                 </view>
               </view>

@@ -91,19 +91,19 @@ export function App(props: {
       </TopNavbar>
       
       <scroll-view 
-        className='videos-container'
-        scroll-y
-        bindscrolltoupper={handleSwipeDown}
-        bindscrolltolower={handleSwipeUp}
-      >
-        {videos.map((video, index) => (
-          <VideoCard
-            key={video.id}
-            video={video}
-            isActive={index === currentVideoIndex}
-          />
-        ))}
-      </scroll-view>
+  className='videos-container'
+  scroll-y
+  bindscrolltoupper={handleSwipeDown}
+  bindscrolltolower={handleSwipeUp}
+>
+  {videos.map((video, index) => (
+    <VideoCard
+      key={video.id}
+      video={video}
+      isActive={index === currentVideoIndex}
+    />
+  ))}
+</scroll-view>
 
       {currentVideo && (
         <EngagementBar

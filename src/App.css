@@ -89,14 +89,14 @@ text {
 
 /* Videos Container */
 .videos-container {
-  height: 100vh;
-  padding-top: 60px;
-  padding-bottom: 80px;
+  height: calc(100vh - 140px);
+  top: 60px; /* Position it below the top nav */
+  bottom: 80px; /* Position it above the bottom nav */
 }
 
 /* Video Card */
 .video-card {
-  height: calc(100vh - 140px);
+  height: 100%;
   width: 100%;
   position: relative;
   display: flex;
