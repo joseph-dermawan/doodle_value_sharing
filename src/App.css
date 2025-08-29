@@ -255,7 +255,6 @@ text {
   z-index: 100;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 25px;
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
