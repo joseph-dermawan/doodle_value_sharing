@@ -7,7 +7,7 @@ import { pluginTypeCheck } from '@rsbuild/plugin-type-check'
 export default defineConfig({
   server: {
     port: 3000,
-    host:"10.249.110.18",
+    host:"10.249.12.228",
   },
   plugins: [
     pluginQRCode({

@@ -6,7 +6,6 @@ export function TopNavbar({ children }: TopNavbarProps) {
   return (
     <view className='top-navbar'>
       <view className='nav-left'>
-        <text className='nav-icon'>📺</text>
         <text className='nav-text'>Following</text>
       </view>
       

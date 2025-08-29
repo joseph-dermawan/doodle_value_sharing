@@ -255,7 +255,7 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
               fontSize: 16,
               marginBottom: 4
             }}>
-              📊
+              🚀
             </text>
             <view style={{
               width: 4,
