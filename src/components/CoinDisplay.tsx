@@ -23,7 +23,9 @@ export function CoinDisplay({ user, onClick }: CoinDisplayProps) {
         alignItems: 'center' as any,
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
         borderRadius: 20,
-        padding: '6px 12px',
+        padding: 6,
+        paddingLeft: 12,
+        paddingRight: 12,
         cursor: onClick ? 'pointer' : 'default'
       }}
       bindtap={onClick ? handleClick : undefined}

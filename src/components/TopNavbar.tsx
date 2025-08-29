@@ -2,7 +2,7 @@ interface TopNavbarProps {
   children?: React.ReactNode;
 }
 
-export function TopNavbar({ children }: TopNavbarProps = {}) {
+export function TopNavbar({ children }: TopNavbarProps) {
   return (
     <view className='top-navbar'>
       <view className='nav-left'>

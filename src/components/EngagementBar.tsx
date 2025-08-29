@@ -127,7 +127,9 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
                 key={amount}
                 style={{
                   backgroundColor: selectedAmount === amount ? '#ff0050' : '#333',
-                  padding: '8px 16px',
+                  padding: 8,
+                  paddingLeft: 16,
+                  paddingRight: 16,
                   borderRadius: 20,
                   cursor: 'pointer' as any,
                   opacity: amount > userCoins ? 0.5 : 1
@@ -148,13 +150,14 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
         <view style={{
           display: 'flex' as any,
           flexDirection: 'row' as any,
-          gap: 12
+          gap: 12,
+          marginTop: 20
         }}>
           <view
             style={{
               flex: 1,
               backgroundColor: '#333',
-              padding: '12px 0',
+              padding: 12,
               borderRadius: 8,
               cursor: 'pointer' as any
             }}
@@ -172,7 +175,7 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
             style={{
               flex: 1,
               backgroundColor: boostAmount > 0 && boostAmount <= userCoins ? '#ff0050' : '#666',
-              padding: '12px 0',
+              padding: 12,
               borderRadius: 8,
               cursor: boostAmount > 0 && boostAmount <= userCoins ? 'pointer' : 'not-allowed',
               opacity: boostAmount > 0 && boostAmount <= userCoins ? 1 : 0.5
@@ -185,7 +188,7 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
               fontSize: 16,
               fontWeight: 'bold' as any
             }}>
-              Boost {boostAmount} 🪙
+              ✓ Boost {boostAmount} 🪙
             </text>
           </view>
         </view>
@@ -353,7 +356,9 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
             <view
               style={{
                 backgroundColor: '#ff0050',
-                padding: '8px 12px',
+                padding: 8,
+                paddingLeft: 12,
+                paddingRight: 12,
                 borderRadius: 20,
                 cursor: 'pointer' as any,
                 marginTop: 'auto'

@@ -41,7 +41,9 @@ export function VideoCard({ video, isActive }: VideoCardProps) {
         style={{
           backgroundImage: `url(${video.url})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          width: '100%',
+          height: '100%'
         }}
       />
       
