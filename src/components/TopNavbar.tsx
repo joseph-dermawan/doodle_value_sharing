@@ -1,4 +1,8 @@
-export function TopNavbar() {
+interface TopNavbarProps {
+  children?: React.ReactNode;
+}
+
+export function TopNavbar({ children }: TopNavbarProps = {}) {
   return (
     <view className='top-navbar'>
       <view className='nav-left'>
@@ -11,6 +15,7 @@ export function TopNavbar() {
       </view>
       
       <view className='nav-right'>
+        {children}
         <text className='nav-icon'>🔍</text>
       </view>
     </view>

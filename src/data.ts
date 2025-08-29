@@ -1,4 +1,4 @@
-import type { Video } from './types.js';
+import type { Video, User } from './types.js';
 import video1 from './assets/videos/video1.mp4';
 import video2 from './assets/videos/video2.mp4';
 import video3 from './assets/videos/video3.mp4';
@@ -16,6 +16,10 @@ export const videosData: Video[] = [
     comments: 13,
     saves: 23,
     shares: 1,
+    views: 12500,
+    totalBoosts: 3,
+    boostPool: 150,
+    engagementScore: 0, // Will be calculated
   },
   {
     id: 2,
@@ -28,6 +32,10 @@ export const videosData: Video[] = [
     comments: 3121,
     saves: 254,
     shares: 420,
+    views: 89600,
+    totalBoosts: 12,
+    boostPool: 680,
+    engagementScore: 0, // Will be calculated
   },
   {
     id: 3,
@@ -40,6 +48,10 @@ export const videosData: Video[] = [
     comments: 238,
     saves: 12,
     shares: 117,
+    views: 45200,
+    totalBoosts: 7,
+    boostPool: 320,
+    engagementScore: 0, // Will be calculated
   },
   {
     id: 4,
@@ -52,5 +64,18 @@ export const videosData: Video[] = [
     comments: 230,
     saves: 1037,
     shares: 42,
+    views: 67800,
+    totalBoosts: 15,
+    boostPool: 890,
+    engagementScore: 0, // Will be calculated
   },
 ];
+
+// Current user data (mock)
+export const currentUser: User = {
+  id: 'user123',
+  username: 'Kenneth',
+  coins: 500,
+  totalEarned: 120,
+  boosts: []
+};
