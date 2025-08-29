@@ -7,8 +7,9 @@ import { pluginTypeCheck } from '@rsbuild/plugin-type-check'
 export default defineConfig({
   server: {
     port: 3000,
-    host:    host:"10.249.110.38",
-gins: [
+    host: "10.249.12.228",
+  },
+  plugins: [
     pluginQRCode({
       schema(url) {
         // Use your actual Wi-Fi IP address for better connectivity

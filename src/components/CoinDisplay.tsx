@@ -28,7 +28,11 @@ export function CoinDisplay({ user, onClick }: CoinDisplayProps) {
         paddingRight: 10,
         cursor: onClick ? 'pointer' : 'default',
         whiteSpace: 'nowrap' as any,
-        minWidth: 70
+        minWidth: 70,
+        position: 'fixed' as any,
+        top: 53,
+        left: 16,
+        zIndex: 101,
       }}
       bindtap={onClick ? handleClick : undefined}
     >
