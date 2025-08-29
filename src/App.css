@@ -20,41 +20,63 @@ text {
 /* Top Navigation */
 .top-navbar {
   position: fixed;
-  top: 4%;
+  top: 40px;
   left: 0;
   right: 0;
   height: 60px;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 16px;
   z-index: 100;
 }
 
-.nav-left, .nav-right {
-  flex: 1;
+.nav-left {
+  position: absolute;
+  left: 16px;
   display: flex;
   align-items: center;
 }
 
+.nav-right {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .nav-center {
-  flex: 2;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .nav-text {
   font-size: 16px;
-  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
 }
 
 .nav-text.active {
   font-weight: bold;
   font-size: 18px;
-  border-bottom: 2px solid #fff;
-  padding-bottom: 4px;
+  color: #fff;
+  position: relative;
   text-align: center;
+  padding-bottom: 8px;
+}
+
+.nav-text.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background-color: #fff;
 }
 
 .nav-icon {
@@ -89,6 +111,11 @@ text {
   background-color: #111;
   border-radius: 12px;
   position: relative;
+  overflow: hidden;
+}
+
+.video-content {
+  object-fit: cover;
 }
 
 .video-overlay {

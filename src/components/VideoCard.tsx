@@ -35,17 +35,18 @@ export function VideoCard({ video, isActive }: VideoCardProps) {
 
   return (
     <view className='video-card'>
-      <view 
-        className='video-player' 
-        bindtap={handleVideoTap}
-        style={{
-          backgroundImage: `url(${video.url})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          width: '100%',
-          height: '100%'
-        }}
-      />
+      <view className='video-player' bindtap={handleVideoTap}>
+        <image 
+          src={video.url}
+          mode="aspectFill"
+          className="video-content"
+          style={{
+            width: '100%',
+            height: '100%',
+            borderRadius: 12
+          }}
+        />
+      </view>
       
       <view className='video-overlay'>
         <view className='video-info'>

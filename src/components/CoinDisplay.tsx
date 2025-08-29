@@ -24,14 +24,16 @@ export function CoinDisplay({ user, onClick }: CoinDisplayProps) {
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
         borderRadius: 20,
         padding: 6,
-        paddingLeft: 12,
-        paddingRight: 12,
-        cursor: onClick ? 'pointer' : 'default'
+        paddingLeft: 10,
+        paddingRight: 10,
+        cursor: onClick ? 'pointer' : 'default',
+        whiteSpace: 'nowrap' as any,
+        minWidth: 70
       }}
       bindtap={onClick ? handleClick : undefined}
     >
       <text style={{
-        fontSize: 16,
+        fontSize: 14,
         marginRight: 4
       }}>
         🪙
@@ -39,7 +41,8 @@ export function CoinDisplay({ user, onClick }: CoinDisplayProps) {
       <text style={{
         color: '#fff',
         fontSize: 14,
-        fontWeight: 'bold' as any
+        fontWeight: 'bold' as any,
+        whiteSpace: 'nowrap' as any
       }}>
         {formatNumber(user.coins)}
       </text>
