@@ -224,9 +224,9 @@ text {
 /* Bottom Navigation */
 .bottom-navbar {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   height: 80px;
   background-color: #000;
   border-top: 1px solid #333;
