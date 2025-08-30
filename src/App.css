@@ -223,6 +223,13 @@ text {
   font-weight: bold;
 }
 
+.engagementbar-container {
+  position: absolute;
+  top: 85%;
+  left:0;
+  z-index: 100;
+}
+
 /* Bottom Navigation */
 .bottom-navbar {
   position: fixed;

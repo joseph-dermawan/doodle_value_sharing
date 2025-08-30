@@ -131,12 +131,13 @@ export function VideoCard({ video, isActive, user, onBoost }: VideoCardProps) {
         </view>
       </view>
 
-      {/* Add EngagementBar for each video */}
-      <EngagementBar
-        video={video}
-        user={user}
-        onBoost={onBoost}
-      />
+      <view className='engagementbar-container'>
+        <EngagementBar
+          video={video}
+          user={user}
+          onBoost={onBoost}
+        />
+      </view>
     </view>
   );
 }
