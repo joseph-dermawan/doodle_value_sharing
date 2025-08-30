@@ -45,50 +45,47 @@ export function VideoCard({ video, isActive, user, onBoost }: VideoCardProps) {
             width: '100%',
             height: '100%',
             borderRadius: '12px',
-            backgroundColor: `hsl(${(video.id * 137) % 360}, 70%, 45%)`, // Generate unique color per video
-            display: 'flex' as any,
-            alignItems: 'center' as any,
-            justifyContent: 'center' as any,
-            position: 'relative' as any
+            backgroundImage: `linear-gradient(135deg, 
+              hsl(${(video.id * 137) % 360}, 70%, 25%), 
+              hsl(${(video.id * 137 + 60) % 360}, 60%, 45%), 
+              hsl(${(video.id * 137 + 120) % 360}, 80%, 35%))`,
+            position: 'relative' as any,
+            overflow: 'hidden' as any
           }}
         >
-          {/* Video placeholder with play icon */}
+          {/* Animated background pattern */}
           <view style={{
             position: 'absolute' as any,
-            top: '50%' as any,
-            left: '50%' as any,
-            transform: 'translate(-50%, -50%)' as any,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            borderRadius: '50px',
-            width: '80px',
-            height: '80px',
-            display: 'flex' as any,
-            alignItems: 'center' as any,
-            justifyContent: 'center' as any,
-            opacity: isActive ? 0.3 : 0.7
-          }}>
-            <text style={{
-              fontSize: '30px',
-              color: '#fff'
-            }}>
-              {isActive ? '⏸️' : '▶️'}
-            </text>
-          </view>
-          
-          {/* Video info overlay */}
+            top: '0px',
+            left: '0px',
+            right: '0px',
+            bottom: '0px',
+            backgroundImage: `repeating-linear-gradient(
+              45deg,
+              rgba(255,255,255,0.1) 0px,
+              rgba(255,255,255,0.1) 1px,
+              transparent 1px,
+              transparent 20px
+            )`,
+            opacity: 0.3
+          }} />
+
+          {/* View count overlay */}
           <view style={{
             position: 'absolute' as any,
-            bottom: '10px',
-            left: '10px',
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
-            padding: '4px 8px',
-            borderRadius: '4px'
+            bottom: '15px',
+            left: '15px',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            padding: '6px 12px',
+            borderRadius: '15px',
+            border: '1px solid rgba(255,255,255,0.2)'
           }}>
             <text style={{
               color: '#fff',
-              fontSize: '12px'
+              fontSize: '13px',
+              fontWeight: 'bold' as any
             }}>
-              Video {video.id}
+              👁️ {video.views > 1000 ? formatNumber(video.views) : video.views} views
             </text>
           </view>
         </view>
