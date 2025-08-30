@@ -39,16 +39,59 @@ export function VideoCard({ video, isActive, user, onBoost }: VideoCardProps) {
   return (
     <view className='video-card'>
       <view className='video-player' bindtap={handleVideoTap}>
-        <image 
-          src={video.url}
-          mode="aspectFill"
+        <view
           className="video-content"
           style={{
             width: '100%',
             height: '100%',
-            borderRadius: 12
+            borderRadius: '12px',
+            backgroundColor: `hsl(${(video.id * 137) % 360}, 70%, 45%)`, // Generate unique color per video
+            display: 'flex' as any,
+            alignItems: 'center' as any,
+            justifyContent: 'center' as any,
+            position: 'relative' as any
           }}
-        />
+        >
+          {/* Video placeholder with play icon */}
+          <view style={{
+            position: 'absolute' as any,
+            top: '50%' as any,
+            left: '50%' as any,
+            transform: 'translate(-50%, -50%)' as any,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            borderRadius: '50px',
+            width: '80px',
+            height: '80px',
+            display: 'flex' as any,
+            alignItems: 'center' as any,
+            justifyContent: 'center' as any,
+            opacity: isActive ? 0.3 : 0.7
+          }}>
+            <text style={{
+              fontSize: '30px',
+              color: '#fff'
+            }}>
+              {isActive ? '⏸️' : '▶️'}
+            </text>
+          </view>
+          
+          {/* Video info overlay */}
+          <view style={{
+            position: 'absolute' as any,
+            bottom: '10px',
+            left: '10px',
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            padding: '4px 8px',
+            borderRadius: '4px'
+          }}>
+            <text style={{
+              color: '#fff',
+              fontSize: '12px'
+            }}>
+              Video {video.id}
+            </text>
+          </view>
+        </view>
       </view>
       
       <view className='video-overlay'>
