@@ -71,7 +71,7 @@ export function VideoCard({ video, isActive, user, onBoost }: VideoCardProps) {
           }} />
 
           {/* View count overlay */}
-          <view style={{
+          {/* <view style={{
             position: 'absolute' as any,
             bottom: '15px',
             left: '15px',
@@ -87,7 +87,7 @@ export function VideoCard({ video, isActive, user, onBoost }: VideoCardProps) {
             }}>
               👁️ {video.views > 1000 ? formatNumber(video.views) : video.views} views
             </text>
-          </view>
+          </view> */}
         </view>
       </view>
       

@@ -30,7 +30,7 @@ export function CoinDisplay({ user, onClick }: CoinDisplayProps) {
         whiteSpace: 'nowrap' as any,
         minWidth: '70px',
         position: 'fixed' as any,
-        top: '53px',
+        top: '70px',
         left: '16px',
         zIndex: '101px',
       }}
