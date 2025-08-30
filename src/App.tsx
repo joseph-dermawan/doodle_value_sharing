@@ -3,7 +3,6 @@ import './App.css';
 import { VideoCard } from './components/VideoCard.js';
 import { TopNavbar } from './components/TopNavbar.js';
 import { BottomNavbar } from './components/BottomNavbar.js';
-import EngagementBar from './components/EngagementBar.js';
 import CoinDisplay from './components/CoinDisplay.js';
 import { videosData, currentUser } from './data.js';
 import type { Video, User, Boost } from './types.js';
@@ -91,27 +90,21 @@ export function App(props: {
       </TopNavbar>
       
       <scroll-view 
-  className='videos-container'
-  scroll-y
-  bindscrolltoupper={handleSwipeDown}
-  bindscrolltolower={handleSwipeUp}
->
-  {videos.map((video, index) => (
-    <VideoCard
-      key={video.id}
-      video={video}
-      isActive={index === currentVideoIndex}
-    />
-  ))}
-</scroll-view>
-
-      {currentVideo && (
-        <EngagementBar
-          video={currentVideo}
-          user={user}
-          onBoost={handleBoost}
-        />
-      )}
+        className='videos-container'
+        scroll-y
+        bindscrolltoupper={handleSwipeDown}
+        bindscrolltolower={handleSwipeUp}
+      >
+        {videos.map((video, index) => (
+          <VideoCard
+            key={video.id}
+            video={video}
+            isActive={index === currentVideoIndex}
+            user={user}
+            onBoost={handleBoost}
+          />
+        ))}
+      </scroll-view>
 
       <BottomNavbar />
     </view>

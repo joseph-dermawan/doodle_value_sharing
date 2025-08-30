@@ -123,7 +123,7 @@ export const calculateFinalPrizePool = (video: Video): number => {
 // Create a new video with proper timing
 export const createVideoWithTiming = (baseVideo: Omit<Video, 'createdAt' | 'boostWindowEnd' | 'lockPeriodEnd' | 'claimPeriodEnd' | 'phase'>): Video => {
   const createdAt = Date.now();
-  const boostWindowHours = 48; // 48 hours for boosting
+  const boostWindowHours = 24; // 1 day for boosting
   const lockPeriodHours = 24;  // 24 hours for lock period
   const claimPeriodHours = 168; // 7 days for claiming
   

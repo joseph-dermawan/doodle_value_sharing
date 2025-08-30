@@ -1,13 +1,16 @@
 import { useCallback } from '@lynx-js/react';
-import type { Video } from '../types.js';
+import type { Video, User } from '../types.js';
 import { formatNumber } from '../types.js';
+import EngagementBar from './EngagementBar.js';
 
 interface VideoCardProps {
   video: Video;
   isActive: boolean;
+  user: User;
+  onBoost: (amount: number) => void;
 }
 
-export function VideoCard({ video, isActive }: VideoCardProps) {
+export function VideoCard({ video, isActive, user, onBoost }: VideoCardProps) {
   const handleLike = useCallback(() => {
     'background only';
     console.log('Like pressed for video:', video.id);
@@ -87,6 +90,13 @@ export function VideoCard({ video, isActive }: VideoCardProps) {
           </view>
         </view>
       </view>
+
+      {/* Add EngagementBar for each video */}
+      <EngagementBar
+        video={video}
+        user={user}
+        onBoost={onBoost}
+      />
     </view>
   );
 }

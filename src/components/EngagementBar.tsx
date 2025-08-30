@@ -206,10 +206,9 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [fluctuationOffset, setFluctuationOffset] = useState(0);
-  const [trendBoost, setTrendBoost] = useState(0);
   
   const baseEngagementScore = calculateEngagementScore(video);
-  const engagementScore = Math.max(0, Math.min(100, baseEngagementScore + fluctuationOffset + trendBoost));
+  const engagementScore = Math.max(0, Math.min(100, baseEngagementScore + fluctuationOffset));
   const scorePercentage = engagementScore;
   
   // Get current phase and timing info
@@ -275,7 +274,7 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
     'background only';
     setIsBoostModalOpen(false);
   }, []);
-  // Engagement fluctuation simulation with stronger, time-limited boost effect
+  // Engagement fluctuation simulation - unique per video
   useEffect(() => {
     // Create video-specific random seed for consistent but unique fluctuations
     const videoSeed = video.id * 12345;
@@ -285,57 +284,22 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
       seedCounter = (seedCounter * 9301 + 49297) % 233280;
       return seedCounter / 233280;
     };
-    
-    const deviation = currentPhase === 'boosting' ? 8 : 5; // Bigger fluctuations during boost phase
-    let prevEngagement = baseEngagementScore;
-    let boostTicks = 0;
-    let isBoostActive = false;
 
     const interval = setInterval(() => {
-      // Generate a seeded normal-distributed random value
-      const randStdNormal = () => {
-        let u = 0, v = 0;
-        while(u === 0) u = seededRandom();
-        while(v === 0) v = seededRandom();
-        return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-      };
-      
-      const sign = seededRandom() < 0.5 ? -1 : 1;
-      const maxStep = 0.8 * deviation; // Bigger steps for more noticeable fluctuation
-      
-      // Apply bounded random walk
-      const change = Math.max(-maxStep, Math.min(maxStep, randStdNormal() * deviation * 0.3));
+      // Generate random fluctuation between -8 and +8 for more noticeable changes
+      const randomFluctuation = (seededRandom() - 0.5) * 16;
       
       // Add general increasing trend during boost phase
       let trendComponent = 0;
       if (currentPhase === 'boosting') {
-        trendComponent = 0.2 * Math.sin(Date.now() / 10000) + 0.1; // Gentle upward trend
+        trendComponent = seededRandom() * 3; // 0-3 upward trend
       }
       
-      const newFluctuation = change + trendComponent;
-      
-      // Random boost events (10% chance per interval during boost phase)
-      if (currentPhase === 'boosting' && !isBoostActive && seededRandom() < 0.1) {
-        isBoostActive = true;
-        boostTicks = 5; // 5 ticks of boost effect
-        setTrendBoost(8 + seededRandom() * 12); // +8-20 boost
-      }
-      
-      // Decay boost effect
-      if (isBoostActive) {
-        boostTicks--;
-        if (boostTicks <= 0) {
-          isBoostActive = false;
-          setTrendBoost(0);
-        }
-      }
-      
-      setFluctuationOffset(newFluctuation);
-      prevEngagement = Math.max(5, Math.min(95, prevEngagement + change));
+      setFluctuationOffset(randomFluctuation + trendComponent);
     }, 2000); // Update every 2 seconds
 
     return () => clearInterval(interval);
-  }, [video.id, baseEngagementScore, currentPhase]); // Re-run when video changes
+  }, [video.id, currentPhase]); // Re-run when video changes
 
   return (
     <>

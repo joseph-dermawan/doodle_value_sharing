@@ -75,43 +75,57 @@ const baseVideosData = [
 
 // Create videos with proper timing - simulate different phases
 export const videosData: Video[] = baseVideosData.map((video, index) => {
-  const baseVideo = createVideoWithTiming(video);
+  const now = Date.now();
+  let createdAt: number;
   
-  // Simulate different phases for demonstration
+  // Create videos posted at different times for variety
   switch (index) {
-    case 0: // Video 1 - Currently boosting (new video)
-      return baseVideo;
-    case 1: // Video 2 - In lock period (simulate boost window ended 12 hours ago)
-      return {
-        ...baseVideo,
-        createdAt: baseVideo.createdAt - (60 * 60 * 60 * 1000), // 60 hours ago
-        boostWindowEnd: baseVideo.createdAt - (12 * 60 * 60 * 1000), // 12 hours ago
-        phase: 'locked' as const
-      };
-    case 2: // Video 3 - In claiming period
-      return {
-        ...baseVideo,
-        createdAt: baseVideo.createdAt - (84 * 60 * 60 * 1000), // 84 hours ago
-        boostWindowEnd: baseVideo.createdAt - (36 * 60 * 60 * 1000), // 36 hours ago
-        lockPeriodEnd: baseVideo.createdAt - (12 * 60 * 60 * 1000), // 12 hours ago
-        phase: 'claiming' as const,
-        qualityScore: 1.8,
-        finalPrizePool: 576
-      };
-    case 3: // Video 4 - Closed (all periods ended)
-      return {
-        ...baseVideo,
-        createdAt: baseVideo.createdAt - (200 * 60 * 60 * 1000), // 200+ hours ago
-        boostWindowEnd: baseVideo.createdAt - (152 * 60 * 60 * 1000),
-        lockPeriodEnd: baseVideo.createdAt - (128 * 60 * 60 * 1000),
-        claimPeriodEnd: baseVideo.createdAt - (8 * 60 * 60 * 1000), // 8 hours ago
-        phase: 'closed' as const,
-        qualityScore: 2.2,
-        finalPrizePool: 1958
-      };
+    case 0: // Video 1 - Posted 6 hours ago (still boosting)
+      createdAt = now - (6 * 60 * 60 * 1000);
+      break;
+    case 1: // Video 2 - Posted 30 hours ago (in lock period)
+      createdAt = now - (30 * 60 * 60 * 1000);
+      break;
+    case 2: // Video 3 - Posted 50 hours ago (in claiming period)
+      createdAt = now - (50 * 60 * 60 * 1000);
+      break;
+    case 3: // Video 4 - Posted 10 days ago (closed)
+      createdAt = now - (240 * 60 * 60 * 1000);
+      break;
     default:
-      return baseVideo;
+      createdAt = now - (index * 12 * 60 * 60 * 1000); // 12 hours apart
   }
+  
+  const boostWindowHours = 24; // 1 day for boosting
+  const lockPeriodHours = 24;  // 24 hours for lock period
+  const claimPeriodHours = 168; // 7 days for claiming
+  
+  const boostWindowEnd = createdAt + (boostWindowHours * 60 * 60 * 1000);
+  const lockPeriodEnd = createdAt + ((boostWindowHours + lockPeriodHours) * 60 * 60 * 1000);
+  const claimPeriodEnd = createdAt + ((boostWindowHours + lockPeriodHours + claimPeriodHours) * 60 * 60 * 1000);
+  
+  // Determine current phase
+  let phase: 'boosting' | 'locked' | 'claiming' | 'closed';
+  if (now < boostWindowEnd) {
+    phase = 'boosting';
+  } else if (now < lockPeriodEnd) {
+    phase = 'locked';
+  } else if (now < claimPeriodEnd) {
+    phase = 'claiming';
+  } else {
+    phase = 'closed';
+  }
+  
+  return {
+    ...video,
+    createdAt,
+    boostWindowEnd,
+    lockPeriodEnd,
+    claimPeriodEnd,
+    phase,
+    qualityScore: phase === 'claiming' || phase === 'closed' ? 1.8 + (index * 0.2) : undefined,
+    finalPrizePool: phase === 'claiming' || phase === 'closed' ? video.boostPool * (1.8 + (index * 0.2)) : undefined
+  };
 });
 
 // Current user data (mock)
