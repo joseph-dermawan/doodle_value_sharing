@@ -1,0 +1,442 @@
+/* TikTok Clone Styles */
+
+:root {
+  background-color: #000;
+  --color-text: #fff;
+}
+
+.app {
+  background-color: #000;
+  color: #fff;
+  height: 100vh;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+text {
+  color: var(--color-text);
+}
+
+/* Top Navigation */
+.top-navbar {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  z-index: 100;
+}
+
+.nav-left {
+  position: absolute;
+  left: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  top: 5px;
+}
+
+.nav-text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+.nav-text.active {
+  font-weight: bold;
+  font-size: 18px;
+  color: #fff;
+  position: relative;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.nav-text.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background-color: #fff;
+}
+
+.nav-icon {
+  font-size: 20px;
+  top: 4px;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+/* Videos Container */
+.videos-container {
+  height: calc(100vh - 140px);
+  top: 60px; /* Position it below the top nav */
+  bottom: 80px; /* Position it above the bottom nav */
+}
+
+/* Video Card */
+.video-card {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-content {
+  width: 100%;
+  height: 100%;
+}
+
+.video-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  padding: 20px 16px;
+}
+
+.video-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* Footer Left */
+.footer-left {
+  flex: 1;
+  margin-right: 16px;
+}
+
+.user-info {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.profile-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-right: 12px;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  max-width: 250px;
+}
+
+.music-info {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.music-icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.song {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Footer Right */
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.action-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.action-icon.heart {
+  color: #ff0050;
+}
+
+.action-count {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.engagementbar-container {
+  position: absolute;
+  top: 85%;
+  left:0;
+  z-index: 100;
+}
+
+/* Bottom Navigation */
+.bottom-navbar {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 80px;
+  background-color: #000;
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  color: #fff;
+}
+
+.nav-item:not(.active) {
+  color: #666;
+}
+
+.nav-item .nav-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.nav-label {
+  font-size: 10px;
+}
+
+.plus-icon {
+  background: linear-gradient(45deg, #ff0050, #ff4081);
+  width: 40px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus-text {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Engagement Bar Styles */
+.engagement-bar {
+  position: fixed;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.engagement-bar.collapsed {
+  padding: 8px;
+  min-height: 60px;
+  width: 48px;
+}
+
+.engagement-bar.expanded {
+  padding: 16px;
+  min-height: 200px;
+  width: 160px;
+}
+
+.engagement-score-bar {
+  width: 100%;
+  height: 8px;
+  background: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.engagement-score-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.engagement-score-fill.high {
+  background: #00ff88;
+}
+
+.engagement-score-fill.medium {
+  background: #ffaa00;
+}
+
+.engagement-score-fill.low {
+  background: #ff4444;
+}
+
+/* Boost Modal Styles */
+.boost-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.boost-modal {
+  background: #1a1a1a;
+  border-radius: 15px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid #333;
+}
+
+.boost-preset-amounts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.boost-preset-amount {
+  background: #333;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.boost-preset-amount.selected {
+  background: #ff0050;
+}
+
+.boost-preset-amount.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Coin Display Styles */
+.coin-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 6px 12px;
+  position: fixed;
+  top: 40px; 
+  left: 16px; 
+  z-index: 101; 
+}
+
+.coin-display.clickable {
+  cursor: pointer;
+}
+
+.coin-display.clickable:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.boost-button {
+  animation: pulse 2s infinite;
+}
+
+.engagement-bar {
+  transition: all 0.3s ease;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .engagement-bar.expanded {
+    width: 140px;
+    min-height: 180px;
+  }
+  
+  .boost-modal {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .coin-display {
+    padding: 4px 8px;
+  }
+}
+
