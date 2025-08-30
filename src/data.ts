@@ -80,17 +80,17 @@ export const videosData: Video[] = baseVideosData.map((video, index) => {
   
   // Create videos posted at different times for variety
   switch (index) {
-    case 0: // Video 1 - Posted 6 hours ago (still boosting)
+    case 0: // Video 1 - Posted 6 hours ago (still in boost period - CAN INVEST!)
       createdAt = now - (6 * 60 * 60 * 1000);
       break;
-    case 1: // Video 2 - Posted 30 hours ago (in lock period)
-      createdAt = now - (30 * 60 * 60 * 1000);
+    case 1: // Video 2 - Posted 12 hours ago (still in boost period - CAN INVEST!)
+      createdAt = now - (12 * 60 * 60 * 1000);
       break;
-    case 2: // Video 3 - Posted 50 hours ago (in claiming period)
-      createdAt = now - (50 * 60 * 60 * 1000);
+    case 2: // Video 3 - Posted 18 hours ago (still in boost period - CAN INVEST!)
+      createdAt = now - (18 * 60 * 60 * 1000);
       break;
-    case 3: // Video 4 - Posted 10 days ago (closed)
-      createdAt = now - (240 * 60 * 60 * 1000);
+    case 3: // Video 4 - Posted 20 hours ago (still in boost period - CAN INVEST!)
+      createdAt = now - (20 * 60 * 60 * 1000);
       break;
     default:
       createdAt = now - (index * 12 * 60 * 60 * 1000); // 12 hours apart
