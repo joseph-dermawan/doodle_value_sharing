@@ -1,4 +1,4 @@
-import { useState, useCallback } from '@lynx-js/react';
+import { useState, useCallback, useEffect } from '@lynx-js/react';
 import type { Video, User, Boost } from '../types.js';
 import { calculateEngagementScore, formatNumber } from '../types.js';
 
@@ -94,15 +94,15 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
         <view style={{ marginBottom: '20px' }}>
           <text style={{
             color: '#888',
-            fontSize: '14px',
+            fontSize: '16px',
             marginBottom: '8px'
           }}>
             Your Coins: {formatNumber(userCoins)} 🪙
           </text>
           <text style={{
             color: '#888',
-            fontSize: '12px',
-            lineHeight: '18px'
+            fontSize: '14px',
+            lineHeight: '20px'
           }}>
             Invest coins in content you believe will perform well. Higher engagement = higher rewards!
           </text>
@@ -138,7 +138,7 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
               >
                 <text style={{
                   color: '#fff',
-                  fontSize: '14px'
+                  fontSize: '16px'
                 }}>
                   {amount} 🪙
                 </text>
@@ -200,9 +200,11 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
 const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) => {
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [fluctuationOffset, setFluctuationOffset] = useState(0);
   
-  const engagementScore = calculateEngagementScore(video);
-  const scorePercentage = Math.min(engagementScore, 100);
+  const baseEngagementScore = calculateEngagementScore(video);
+  const engagementScore = Math.max(0, Math.min(100, baseEngagementScore + fluctuationOffset));
+  const scorePercentage = engagementScore;
 
   const handleExpand = useCallback(() => {
     'background only';
@@ -222,6 +224,17 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
   const handleCloseBoost = useCallback(() => {
     'background only';
     setIsBoostModalOpen(false);
+  }, []);
+
+  // Engagement fluctuation simulation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Generate random fluctuation between -5 and +5
+      const randomFluctuation = (Math.random() - 0.5) * 10;
+      setFluctuationOffset(randomFluctuation);
+    }, 2000); // Update every 2 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -252,16 +265,16 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
             bindtap={handleExpand}
           >
             <text style={{
-              fontSize: '16px',
-              marginBottom: '4px'
+              fontSize: '20px',
+              marginBottom: '6px'
             }}>
               🚀
             </text>
             <view style={{
-              width: '4px',
-              height: '30px',
+              width: '6px',
+              height: '45px',
               backgroundColor: '#333',
-              borderRadius: '2px',
+              borderRadius: '3px',
               overflow: 'hidden' as any
             }}>
               <view style={{
