@@ -101,8 +101,7 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
           </text>
           <text style={{
             color: '#888',
-            fontSize: '14px',
-            lineHeight: '20px'
+            fontSize: '14px'
           }}>
             Invest coins in content you believe will perform well. Higher engagement = higher rewards!
           </text>
@@ -201,9 +200,10 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [fluctuationOffset, setFluctuationOffset] = useState(0);
+  const [trendBoost, setTrendBoost] = useState(0);
   
   const baseEngagementScore = calculateEngagementScore(video);
-  const engagementScore = Math.max(0, Math.min(100, baseEngagementScore + fluctuationOffset));
+  const engagementScore = Math.max(0, Math.min(100, baseEngagementScore + fluctuationOffset + trendBoost));
   const scorePercentage = engagementScore;
 
   const handleExpand = useCallback(() => {
@@ -229,10 +229,13 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
   // Engagement fluctuation simulation
   useEffect(() => {
     const interval = setInterval(() => {
-      // Generate random fluctuation between -5 and +5
-      const randomFluctuation = (Math.random() - 0.5) * 10;
+      // Generate bigger random fluctuation between -10 and +15 (with upward bias)
+      const randomFluctuation = (Math.random() - 0.4) * 25;
       setFluctuationOffset(randomFluctuation);
-    }, 2000); // Update every 2 seconds
+      
+      // Add gradual trend boost over time (slowly increases engagement)
+      setTrendBoost(prev => Math.min(prev + 0.5, 15));
+    }, 1500); // Update every 1.5 seconds for more dynamic feel
 
     return () => clearInterval(interval);
   }, []);
@@ -275,14 +278,15 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
               height: '45px',
               backgroundColor: '#333',
               borderRadius: '3px',
-              overflow: 'hidden' as any
+              overflow: 'hidden' as any,
+              display: 'flex' as any,
+              alignItems: 'flex-end' as any
             }}>
               <view style={{
                 width: '100%',
                 height: `${scorePercentage}%`,
                 backgroundColor: scorePercentage > 70 ? '#00ff88' : scorePercentage > 40 ? '#ffaa00' : '#ff4444',
-                borderRadius: '2px',
-                transition: 'height 0.5s ease'
+                borderRadius: '2px'
               }} />
             </view>
           </view>
@@ -342,8 +346,7 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
                   width: `${scorePercentage}%`,
                   height: '100%',
                   backgroundColor: scorePercentage > 70 ? '#00ff88' : scorePercentage > 40 ? '#ffaa00' : '#ff4444',
-                  borderRadius: '4px',
-                  transition: 'width 0.5s ease'
+                  borderRadius: '4px'
                 }} />
               </view>
             </view>
