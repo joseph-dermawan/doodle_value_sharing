@@ -225,17 +225,49 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
     'background only';
     setIsBoostModalOpen(false);
   }, []);
-
-  // Engagement fluctuation simulation
+  // Engagement fluctuation simulation with stronger, time-limited boost effect
   useEffect(() => {
+    const deviation = 5;
+    let prevEngagement = calculateEngagementScore(video); // Start from base score
+    let boostTicks = 0;
+    let isBoostActive = false;
+
     const interval = setInterval(() => {
-      // Generate bigger random fluctuation between -10 and +15 (with upward bias)
-      const randomFluctuation = (Math.random() - 0.4) * 25;
-      setFluctuationOffset(randomFluctuation);
-      
-      // Add gradual trend boost over time (slowly increases engagement)
-      setTrendBoost(prev => Math.min(prev + 0.5, 15));
-    }, 1500); // Update every 1.5 seconds for more dynamic feel
+      // Generate a normal-distributed random value, multiplied by random sign
+      const randStdNormal = () => {
+        let u = 0, v = 0;
+        while(u === 0) u = Math.random();
+        while(v === 0) v = Math.random();
+        return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+      };
+      const sign = Math.random() < 0.5 ? -1 : 1;
+      const maxStep = 0.5 * deviation;
+      // Occasionally force a downward trend
+      const downwardChance = Math.random();
+      const stepBase = randStdNormal() * deviation * 0.5;
+      const step = downwardChance < 0.25 ? -Math.abs(stepBase) : stepBase * sign;
+
+      // Strong boost effect for 3 ticks, then expire
+      let boostValue = 0;
+      if (boostTicks < 3) {
+        boostValue = 15;
+        boostTicks++;
+        isBoostActive = true;
+      } else {
+        boostValue = 0;
+        isBoostActive = false;
+      }
+
+      // Calculate new engagement value
+      let newEngagement = prevEngagement + step + boostValue;
+      newEngagement = Math.max(0, Math.min(100, newEngagement));
+      prevEngagement = newEngagement;
+
+      // Set fluctuationOffset and trendBoost so engagementScore reflects newEngagement
+      setFluctuationOffset(newEngagement - baseEngagementScore);
+      setTrendBoost(boostValue);
+
+    }, 1500);
 
     return () => clearInterval(interval);
   }, []);
