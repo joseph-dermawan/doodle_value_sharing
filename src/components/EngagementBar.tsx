@@ -304,18 +304,15 @@ const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) =
   return (
     <>
       <view style={{
-        position: 'fixed' as any,
+        position: 'absolute' as any,
         left: '12px',
-        top: '50%',
-        transform: 'translateY(-50%)' as any,
-        zIndex: 100,
+        bottom: '120px',
+        zIndex: 10,
         backgroundColor: 'rgba(0, 0, 0, 0.7)',
         borderRadius: '25px',
         padding: isExpanded ? '16px' : '8px',
         minHeight: isExpanded ? '200px' : '60px',
         width: isExpanded ? '160px' : '48px',
-        transition: 'all 0.3s ease',
-        cursor: 'pointer' as any
       }}>
         {!isExpanded ? (
           // Collapsed state
