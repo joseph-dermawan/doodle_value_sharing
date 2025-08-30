@@ -1,10 +1,12 @@
 import type { Video, User } from './types.js';
+import { createVideoWithTiming } from './types.js';
 import video1 from './assets/videos/video1.mp4';
 import video2 from './assets/videos/video2.mp4';
 import video3 from './assets/videos/video3.mp4';
 import video4 from './assets/videos/video4.mp4';
 
-export const videosData: Video[] = [
+// Create base video data without timing
+const baseVideosData = [
   {
     id: 1,
     url: video1,
@@ -70,6 +72,47 @@ export const videosData: Video[] = [
     engagementScore: 0, // Will be calculated
   },
 ];
+
+// Create videos with proper timing - simulate different phases
+export const videosData: Video[] = baseVideosData.map((video, index) => {
+  const baseVideo = createVideoWithTiming(video);
+  
+  // Simulate different phases for demonstration
+  switch (index) {
+    case 0: // Video 1 - Currently boosting (new video)
+      return baseVideo;
+    case 1: // Video 2 - In lock period (simulate boost window ended 12 hours ago)
+      return {
+        ...baseVideo,
+        createdAt: baseVideo.createdAt - (60 * 60 * 60 * 1000), // 60 hours ago
+        boostWindowEnd: baseVideo.createdAt - (12 * 60 * 60 * 1000), // 12 hours ago
+        phase: 'locked' as const
+      };
+    case 2: // Video 3 - In claiming period
+      return {
+        ...baseVideo,
+        createdAt: baseVideo.createdAt - (84 * 60 * 60 * 1000), // 84 hours ago
+        boostWindowEnd: baseVideo.createdAt - (36 * 60 * 60 * 1000), // 36 hours ago
+        lockPeriodEnd: baseVideo.createdAt - (12 * 60 * 60 * 1000), // 12 hours ago
+        phase: 'claiming' as const,
+        qualityScore: 1.8,
+        finalPrizePool: 576
+      };
+    case 3: // Video 4 - Closed (all periods ended)
+      return {
+        ...baseVideo,
+        createdAt: baseVideo.createdAt - (200 * 60 * 60 * 1000), // 200+ hours ago
+        boostWindowEnd: baseVideo.createdAt - (152 * 60 * 60 * 1000),
+        lockPeriodEnd: baseVideo.createdAt - (128 * 60 * 60 * 1000),
+        claimPeriodEnd: baseVideo.createdAt - (8 * 60 * 60 * 1000), // 8 hours ago
+        phase: 'closed' as const,
+        qualityScore: 2.2,
+        finalPrizePool: 1958
+      };
+    default:
+      return baseVideo;
+  }
+});
 
 // Current user data (mock)
 export const currentUser: User = {
