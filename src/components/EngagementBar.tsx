@@ -154,47 +154,53 @@ const BoostModal: React.FC<BoostModalProps> = ({ isOpen, onClose, onBoost, userC
         }}>
           <view
             style={{
-              flex: 1,
+              flex: 0.8,
               backgroundColor: '#333',
-              padding: '12px',
+              padding: '10px 8px',
               borderRadius: '8px',
-              cursor: 'pointer' as any
+              cursor: 'pointer' as any,
+              minWidth: '80px',
+              maxWidth: '100px'
             }}
             bindtap={handleClose}
           >
             <text style={{
               color: '#fff',
               textAlign: 'center' as any,
-              fontSize: '16px'
+              fontSize: '15px',
+              padding: '2px 0',
+              paddingTop: '4px',
             }}>
               Cancel
             </text>
           </view>
           <view
             style={{
-              flex: 1,
+              flex: 1.5,
               backgroundColor: boostAmount > 0 && boostAmount <= userCoins ? '#ff0050' : '#666',
-              padding: '12px',
+              padding: '14px 12px',
               borderRadius: '8px',
               cursor: boostAmount > 0 && boostAmount <= userCoins ? 'pointer' : 'not-allowed',
-              opacity: boostAmount > 0 && boostAmount <= userCoins ? 1 : 0.5
+              opacity: boostAmount > 0 && boostAmount <= userCoins ? 1 : 0.5,
+              minWidth: '120px'
             }}
             bindtap={handleBoost}
           >
             <text style={{
               color: '#fff',
               textAlign: 'center' as any,
-              fontSize: '16px',
-              fontWeight: 'bold' as any
+              fontSize: '17px',
+              fontWeight: 'bold' as any,
+              whiteSpace: 'nowrap' as any
             }}>
-              ✓ Boost {boostAmount} 🪙
+              🚀 Boost {boostAmount} 🪙
             </text>
           </view>
         </view>
-      </view>
-    </view>
-  );
-};
+            </view>
+          </view>
+        );
+      };
 
 const EngagementBar: React.FC<EngagementBarProps> = ({ video, user, onBoost }) => {
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
